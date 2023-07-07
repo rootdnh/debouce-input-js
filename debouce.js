@@ -28,15 +28,18 @@ function handleKeyUp(value) {
  fetchUsersName(value).then((data) => {
   const filteredUsers = data
    .map(
-    (user) =>
-     `
+    (user) =>{
+      let {name, id} = user;
+      return (`
       <li>
         <a>
-          <span>${user.name}</span>
-          <p>${user.id}</p>
+          <span>${name.replace(new RegExp(value, 'gi'), ()=>{
+            return `<strong>${value}</strong>`
+          })}</span>
+          <p>${id}</p>
         </a>
       </li>
-      `
+      `)}
    )
    .join("");
 
